@@ -2,7 +2,8 @@ const initSqlJs = require('sql.js');
 const fs = require('fs');
 const path = require('path');
 
-const DB_PATH = path.join(__dirname, '../../atlas.db');
+const isServerless = Boolean(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME || process.env.NODE_ENV === 'production');
+const DB_PATH = isServerless ? path.join('/tmp', 'atlas.db') : path.join(__dirname, '../../atlas.db');
 const SCHEMA_PATH = path.join(__dirname, 'schema.sql');
 
 let db = null;
@@ -13,15 +14,21 @@ async function initDb() {
 
   // Load existing DB file or create new
   if (fs.existsSync(DB_PATH)) {
-    const fileBuffer = fs.readFileSync(DB_PATH);
-    db = new SQL.Database(fileBuffer);
+    try {
+      const fileBuffer = fs.readFileSync(DB_PATH);
+      db = new SQL.Database(fileBuffer);
+    } catch (e) {
+      db = new SQL.Database();
+    }
   } else {
     db = new SQL.Database();
   }
 
   // Enable WAL-style persistence (sql.js writes when we call export)
-  const schema = fs.readFileSync(SCHEMA_PATH, 'utf8');
-  db.run(schema);
+  if (fs.existsSync(SCHEMA_PATH)) {
+    const schema = fs.readFileSync(SCHEMA_PATH, 'utf8');
+    db.run(schema);
+  }
 
   // Safe migrations for card verification columns
   const migrationCols = [
@@ -48,8 +55,12 @@ async function initDb() {
 
 function saveDb() {
   if (!db) return;
-  const data = db.export();
-  fs.writeFileSync(DB_PATH, Buffer.from(data));
+  try {
+    const data = db.export();
+    fs.writeFileSync(DB_PATH, Buffer.from(data));
+  } catch (e) {
+    // Ignore write errors on read-only environments
+  }
 }
 
 function getDb() {
