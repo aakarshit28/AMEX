@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ATLAS by American Express — Predictive Autonomous Travel AI</title>
+  <meta name="description" content="ATLAS — American Express Predictive Autonomous Travel AI. Intelligent journey management that acts before you know you need it.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- SVG Gradient Definitions -->
+<svg class="svg-defs" aria-hidden="true">
+  <defs>
+    <linearGradient id="gaugeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#006FCF"/>
+      <stop offset="100%" stop-color="#00A650"/>
+    </linearGradient>
+    <linearGradient id="gaugeGradWarn" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#C41E3A"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<div class="app-container">
+
+  <!-- ==================== SIDEBAR ==================== -->
+  <aside class="sidebar">
+    <!-- Brand -->
+    <div class="brand-section">
+      <div class="brand-logo-row">
+        <div class="brand-logo" title="American Express">
+          <svg viewBox="0 0 32 20"><text x="0" y="16" font-family="Arial" font-weight="900" font-size="12" fill="white" letter-spacing="1">AMEX</text></svg>
+        </div>
+        <h1 class="brand-name">ATLAS</h1>
+      </div>
+      <div class="brand-tagline">Intelligent Travel Command</div>
+    </div>
+
+    <!-- Navigation -->
+    <ul class="nav-menu">
+      <li class="nav-label">Core Intelligence</li>
+
+      <li class="nav-item active" data-tab="simulator">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
+        Operations Dashboard
+      </li>
+      <li class="nav-item" data-tab="graph">
+        <svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="5" r="2"/><circle cx="19" cy="12" r="2"/><circle cx="12" cy="19" r="2"/><line x1="7" y1="12" x2="17" y2="12"/><line x1="12" y1="7" x2="12" y2="17"/><line x1="6.5" y1="10.5" x2="10.5" y2="6.5"/><line x1="13.5" y1="6.5" x2="17.5" y2="10.5"/></svg>
+        Journey Knowledge Graph
+      </li>
+      <li class="nav-item" data-tab="swarm">
+        <svg viewBox="0 0 24 24"><path d="M12 2a3 3 0 100 6 3 3 0 000-6zM4 8a2 2 0 100 4 2 2 0 000-4zm16 0a2 2 0 100 4 2 2 0 000-4zM12 14c-3.3 0-10 1.7-10 5v1h20v-1c0-3.3-6.7-5-10-5z"/></svg>
+        Agent Swarm Control
+      </li>
+
+      <li class="nav-label" style="margin-top: 4px;">Profile & Logs</li>
+
+      <li class="nav-item" data-tab="twin">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+        Traveler Digital Twin
+      </li>
+      <li class="nav-item" data-tab="logs">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+        System Telemetry
+      </li>
+    </ul>
+
+    <!-- Footer: Mini Card + Status -->
+    <div class="sidebar-footer">
+      <div class="amex-card-visual">
+        <div class="card-chip"></div>
+        <div class="card-label">Member Since</div>
+        <div class="card-member">AMIT SHARMA</div>
+        <div class="card-wave">●●●</div>
+      </div>
+      <div class="system-status">
+        <div class="status-dot" id="system-status-dot"></div>
+        <span class="system-status-text">ATLAS Brain Online</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ==================== MAIN CONTENT ==================== -->
+  <div class="main-content">
+
+    <!-- Top Header Bar -->
+    <div class="top-header">
+      <div class="top-header-left">
+        <div class="top-header-title" id="page-header-title">Operations Dashboard</div>
+        <div class="top-header-breadcrumb">American Express ATLAS &rsaquo; Live Journey Intelligence &rsaquo; Simulation</div>
+      </div>
+      <div class="top-header-right">
+        <div class="header-alert-pill" id="header-alert-pill">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
+          Disruption Detected
+        </div>
+        <div class="header-pill">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+          EK-513 &middot; In-Air
+        </div>
+        <div class="header-pill" id="header-journey-health">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.49 5.48c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm-3.6 13.9l1-4.4 2.1 2v6h2v-7.5l-2.1-2 .6-3c1.3 1.5 3.3 2.5 5.5 2.5v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1l-5.2 2.2v4.7h2v-3.4l1.8-.7-1.6 8.1-4.9-1-.4 2 7 1.4z"/></svg>
+          Journey Score: <span id="header-score-val" style="font-weight:800;">97</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB: DASHBOARD / SIMULATOR ==================== -->
+    <section id="tab-simulator" class="tab-content active">
+      <div class="page-scroll">
+
+        <!-- Route Bar -->
+        <div class="route-bar-card">
+          <div class="route-bar-top">
+            <div class="route-label">Active Itinerary</div>
+            <div class="route-meta-pills">
+              <span class="badge badge-blue" id="route-badge-class">Business Class &middot; EK</span>
+              <span class="badge badge-amber" id="route-badge-layover">Layover: 120m (DXB)</span>
+            </div>
+          </div>
+
+          <div class="route-display">
+            <!-- DEL -->
+            <div class="route-city">
+              <div class="route-code">DEL</div>
+              <div class="route-name">New Delhi</div>
+              <div class="route-city-status" id="del-status" style="color: var(--status-green);">Departed</div>
+            </div>
+
+            <!-- DEL → DXB Connector -->
+            <div class="route-connector">
+              <div class="route-line">
+                <div class="route-line-progress" id="leg1-progress" style="width: 60%;"></div>
+                <div class="route-plane" id="leg1-plane">
+                  <svg viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L14 19v-5.5l8 2.5z"/></svg>
+                </div>
+              </div>
+              <div class="route-leg-info" id="leg1-info">EK-513 &middot; Airborne</div>
+            </div>
+
+            <!-- DXB -->
+            <div class="route-city">
+              <div class="route-code" id="transit-code">DXB</div>
+              <div class="route-name">Dubai Intl</div>
+              <div class="route-city-status" id="dxb-status" style="color: var(--text-muted);">Upcoming</div>
+            </div>
+
+            <!-- DXB → LHR Connector -->
+            <div class="route-connector">
+              <div class="route-line">
+                <div class="route-line-progress" id="leg2-progress" style="width: 0%;"></div>
+              </div>
+              <div class="route-leg-info" id="leg2-info">EK-003 &middot; Scheduled</div>
+            </div>
+
+            <!-- LHR -->
+            <div class="route-city">
+              <div class="route-code">LHR</div>
+              <div class="route-name">London Heathrow</div>
+              <div class="route-city-status" id="lhr-status" style="color: var(--text-muted);">Upcoming</div>
+            </div>
+          </div>
+
+          <div class="route-actions">
+            <button class="btn btn-primary" id="btn-trigger-storm">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.36 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.64-4.96zM17 13l-5 6v-4H9l5-6v4h3z"/></svg>
+              Simulate Dubai Storm Incident
+            </button>
+            <button class="btn btn-outline" id="btn-reset-sim" disabled>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 1 0 .49-3.99"/></svg>
+              Reset
+            </button>
+            <span id="sim-status-tag" style="font-size: 12px; color: var(--text-muted); display:flex; align-items:center; gap:6px; margin-left: auto;">
+              Status: <strong style="color: var(--text-dim);" id="sim-status-text">Idle</strong>
+            </span>
+          </div>
+        </div>
+
+        <!-- Journey Health Score + Decision Simulator (side by side top row) -->
+        <div style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 20px;">
+
+          <!-- Health Score Card -->
+          <div class="card card-blue-header">
+            <div class="card-header">
+              <div class="card-title">
+                <div class="card-title-icon">
+                  <svg viewBox="0 0 24 24"><path d="M3.5 18.5l6-6 4 4L22 6.92"/></svg>
+                </div>
+                Journey Health Score
+              </div>
+              <span class="badge badge-green" id="health-status-badge">Optimal</span>
+            </div>
+            <div class="health-panel card-padded">
+              <div class="gauge-wrapper">
+                <svg class="gauge-svg" viewBox="0 0 90 90">
+                  <circle class="gauge-track" cx="45" cy="45" r="38"/>
+                  <circle class="gauge-progress" id="gauge-fill" cx="45" cy="45" r="38"/>
+                </svg>
+                <div class="gauge-center">
+                  <div class="gauge-value" id="gauge-val">97</div>
+                  <div class="gauge-unit">/ 100</div>
+                </div>
+              </div>
+
+              <div class="health-breakdown">
+                <div class="health-item">
+                  <div class="health-item-label">Weather</div>
+                  <div class="health-item-row">
+                    <div class="health-item-bar"><div class="health-item-fill" id="hb-weather" style="width:100%"></div></div>
+                    <div class="health-item-value" id="hv-weather">100</div>
+                  </div>
+                </div>
+                <div class="health-item">
+                  <div class="health-item-label">Airport</div>
+                  <div class="health-item-row">
+                    <div class="health-item-bar"><div class="health-item-fill" id="hb-airport" style="width:96%"></div></div>
+                    <div class="health-item-value" id="hv-airport">96</div>
+                  </div>
+                </div>
+                <div class="health-item">
+                  <div class="health-item-label">Connection</div>
+                  <div class="health-item-row">
+                    <div class="health-item-bar"><div class="health-item-fill" id="hb-conn" style="width:91%"></div></div>
+                    <div class="health-item-value" id="hv-conn">91</div>
+                  </div>
+                </div>
+                <div class="health-item">
+                  <div class="health-item-label">Hotel</div>
+                  <div class="health-item-row">
+                    <div class="health-item-bar"><div class="health-item-fill" id="hb-hotel" style="width:100%"></div></div>
+                    <div class="health-item-value" id="hv-hotel">100</div>
+                  </div>
+                </div>
+                <div class="health-item" style="grid-column: span 2;">
+                  <div class="health-item-label">Ground Mobility</div>
+                  <div class="health-item-row">
+                    <div class="health-item-bar"><div class="health-item-fill" id="hb-traffic" style="width:94%"></div></div>
+                    <div class="health-item-value" id="hv-traffic">94</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Decision Simulator Card -->
+          <div class="card card-blue-header">
+            <div class="card-header">
+              <div class="card-title">
+                <div class="card-title-icon">
+                  <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                </div>
+                AI Decision Simulator Engine
+              </div>
+              <span style="font-size:11px; color: var(--text-muted);" id="decision-state-label">Running 247 simulations/sec</span>
+            </div>
+            <div style="padding: 16px 20px;">
+              <table class="decision-table">
+                <tr class="decision-row" id="row-a">
+                  <td>
+                    <div class="decision-option-label">
+                      <span class="decision-option-tag">A</span>
+                      Current Emirates Flight
+                    </div>
+                  </td>
+                  <td>
+                    <div class="prob-cell">
+                      <div class="prob-bar"><div class="prob-fill" id="fill-a" style="width:24%"></div></div>
+                      <span class="prob-value" id="val-a">24%</span>
+                      <span class="badge badge-red" id="status-a">Risky</span>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="decision-row" id="row-b">
+                  <td>
+                    <div class="decision-option-label">
+                      <span class="decision-option-tag">B</span>
+                      Later Emirates Connection
+                    </div>
+                  </td>
+                  <td>
+                    <div class="prob-cell">
+                      <div class="prob-bar"><div class="prob-fill" id="fill-b" style="width:84%"></div></div>
+                      <span class="prob-value" id="val-b">84%</span>
+                      <span class="badge badge-blue" id="status-b">Viable</span>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="decision-row selected" id="row-c">
+                  <td>
+                    <div class="decision-option-label">
+                      <span class="decision-option-tag">C</span>
+                      Qatar Airways via Doha
+                    </div>
+                  </td>
+                  <td>
+                    <div class="prob-cell">
+                      <div class="prob-bar"><div class="prob-fill" id="fill-c" style="width:96%"></div></div>
+                      <span class="prob-value" id="val-c">96%</span>
+                      <span class="badge badge-green" id="status-c">Selected ✓</span>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="decision-row" id="row-d">
+                  <td>
+                    <div class="decision-option-label">
+                      <span class="decision-option-tag">D</span>
+                      Eurostar via Paris
+                    </div>
+                  </td>
+                  <td>
+                    <div class="prob-cell">
+                      <div class="prob-bar"><div class="prob-fill" id="fill-d" style="width:93%"></div></div>
+                      <span class="prob-value" id="val-d">93%</span>
+                      <span class="badge badge-amber" id="status-d">Backup</span>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Row: Timeline + Phone -->
+        <div class="simulator-grid">
+
+          <!-- Left: Explainability Timeline -->
+          <div class="card card-blue-header">
+            <div class="card-header">
+              <div class="card-title">
+                <div class="card-title-icon">
+                  <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm.5 5v5.25l4.5 2.67-.75 1.23L11 13V7h1.5z"/></svg>
+                </div>
+                Autonomous Decision Timeline
+              </div>
+              <span style="font-size:11px; color:var(--text-dim);" id="timeline-status">Awaiting simulation</span>
+            </div>
+            <div class="timeline-list" style="padding: 8px 4px; max-height: 320px; overflow-y:auto;">
+              <div class="timeline-step" id="ts-1">
+                <div class="timeline-dot-col"><div class="timeline-dot"></div></div>
+                <div class="timeline-time">08:31</div>
+                <div class="timeline-body">
+                  <div class="timeline-title">Dubai Storm Detected</div>
+                  <div class="timeline-desc">Doppler radar: wind gusts 48kt, lightning risk at DXB Runways 30L/12R.</div>
+                </div>
+              </div>
+              <div class="timeline-step" id="ts-2">
+                <div class="timeline-dot-col"><div class="timeline-dot"></div></div>
+                <div class="timeline-time">08:33</div>
+                <div class="timeline-body">
+                  <div class="timeline-title">Inbound Aircraft Delayed</div>
+                  <div class="timeline-desc">EK-513 Boeing 777 ground-held at DEL. Dubai ATC congestion.</div>
+                </div>
+              </div>
+              <div class="timeline-step" id="ts-3">
+                <div class="timeline-dot-col"><div class="timeline-dot"></div></div>
+                <div class="timeline-time">08:35</div>
+                <div class="timeline-body">
+                  <div class="timeline-title">Connection Failure Predicted</div>
+                  <div class="timeline-desc">Transit window collapsed to 18 min. Success probability: 11%. AI Swarm activated.</div>
+                </div>
+              </div>
+              <div class="timeline-step" id="ts-4">
+                <div class="timeline-dot-col"><div class="timeline-dot"></div></div>
+                <div class="timeline-time">08:36</div>
+                <div class="timeline-body">
+                  <div class="timeline-title">Alternative Booked: Qatar Airways</div>
+                  <div class="timeline-desc">DEL → DOH → LHR confirmed. QR-571 / QR-003. Seat 12K. Vegetarian meal.</div>
+                </div>
+              </div>
+              <div class="timeline-step" id="ts-5">
+                <div class="timeline-dot-col"><div class="timeline-dot"></div></div>
+                <div class="timeline-time">08:38</div>
+                <div class="timeline-body">
+                  <div class="timeline-title">London Hotel Extended</div>
+                  <div class="timeline-desc">Marriott Park Lane check-in extended 24h. Late checkout and lounge access secured.</div>
+                </div>
+              </div>
+              <div class="timeline-step" id="ts-6">
+                <div class="timeline-dot-col"><div class="timeline-dot"></div></div>
+                <div class="timeline-time">08:39</div>
+                <div class="timeline-body">
+                  <div class="timeline-title">Ground Transport Updated</div>
+                  <div class="timeline-desc">Addison Lee rescheduled to 18:00 LHR pickup. Original booking cancelled (no charge).</div>
+                </div>
+              </div>
+              <div class="timeline-step" id="ts-7">
+                <div class="timeline-dot-col"><div class="timeline-dot"></div></div>
+                <div class="timeline-time">08:40</div>
+                <div class="timeline-body">
+                  <div class="timeline-title">Corporate Calendar &amp; Office Synced</div>
+                  <div class="timeline-desc">Board meeting deferred 2h. Slack OOO status updated. EU261 claim filed ($650).</div>
+                </div>
+              </div>
+              <div class="timeline-step" id="ts-8">
+                <div class="timeline-dot-col"><div class="timeline-dot"></div></div>
+                <div class="timeline-time">08:41</div>
+                <div class="timeline-body">
+                  <div class="timeline-title">Traveler Notified — All Operations Complete</div>
+                  <div class="timeline-desc">"We've already handled everything. Enjoy your flight." — ATLAS</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Phone Mockup -->
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            <div class="phone-wrap">
+              <div class="phone-device">
+                <div class="phone-notch">
+                  <div class="phone-notch-cam"></div>
+                </div>
+                <div class="phone-status-bar">
+                  <span id="phone-clock-display">12:41</span>
+                  <span>▲ ◉ 98%</span>
+                </div>
+                <div class="phone-screen">
+                  <!-- App Header -->
+                  <div class="phone-app-header">
+                    <div class="phone-app-brand">ATLAS</div>
+                    <div class="phone-avatar">AS</div>
+                  </div>
+
+                  <!-- Mini Journey Card -->
+                  <div class="phone-mini-card">
+                    <div class="phone-card-label">Active Journey</div>
+                    <div class="phone-card-route">DEL → DXB → LHR</div>
+                    <div class="phone-card-status">
+                      <div class="phone-card-status-dot" id="phone-status-dot"></div>
+                      <span id="phone-status-text">All systems nominal</span>
+                    </div>
+                  </div>
+
+                  <!-- Quick Metrics Row -->
+                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
+                    <div style="background: rgba(255,255,255,0.04); border-radius: 8px; padding: 8px; border: 1px solid rgba(255,255,255,0.06);">
+                      <div style="font-size: 8px; color: rgba(255,255,255,0.4); text-transform:uppercase; letter-spacing:1px; margin-bottom:2px;">Departure</div>
+                      <div style="font-size: 13px; font-weight: 800; color: white;" id="phone-dep-time">09:45</div>
+                      <div style="font-size: 9px; color: rgba(255,255,255,0.4);">EK-513 On Time</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.04); border-radius: 8px; padding: 8px; border: 1px solid rgba(255,255,255,0.06);">
+                      <div style="font-size: 8px; color: rgba(255,255,255,0.4); text-transform:uppercase; letter-spacing:1px; margin-bottom:2px;">Arrival</div>
+                      <div style="font-size: 13px; font-weight: 800; color: white;" id="phone-arr-time">17:20</div>
+                      <div style="font-size: 9px; color: rgba(255,255,255,0.4);">EK-003 LHR</div>
+                    </div>
+                  </div>
+
+                  <!-- ATLAS Notification -->
+                  <div class="phone-notification" id="phone-notif" onclick="document.getElementById('phone-ticket').classList.add('show')">
+                    <div class="phone-notif-icon">
+                      <svg viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                    </div>
+                    <div class="phone-notif-body">
+                      <div class="phone-notif-source">ATLAS · American Express</div>
+                      <div class="phone-notif-text">We've already handled everything. Enjoy your flight.</div>
+                      <div class="phone-notif-cta">Tap to view all changes →</div>
+                    </div>
+                  </div>
+
+                  <!-- Ticket Detail Slide-up -->
+                  <div class="phone-ticket" id="phone-ticket">
+                    <div class="phone-ticket-header">
+                      <div class="phone-ticket-title">ATLAS Journey Resolution</div>
+                      <button class="phone-ticket-close" id="btn-close-ticket">&times;</button>
+                    </div>
+                    <div class="phone-ticket-body">
+                      <div class="ticket-item">
+                        <div class="ticket-item-title">
+                          <span>Flight Rescheduled</span>
+                          <span style="color:var(--status-green); font-size:9px;">✓ CONFIRMED</span>
+                        </div>
+                        <div class="ticket-item-text">
+                          <strong>Route:</strong> DEL → DOH → LHR<br>
+                          <strong>Carrier:</strong> Qatar Airways QR-571/QR-003<br>
+                          <strong>Seat:</strong> 12K · Vegetarian Meal
+                        </div>
+                      </div>
+                      <div class="ticket-item green">
+                        <div class="ticket-item-title">
+                          <span>Hotel Extended</span>
+                          <span style="color:var(--status-green); font-size:9px;">✓ DONE</span>
+                        </div>
+                        <div class="ticket-item-text">
+                          <strong>Marriott Park Lane</strong><br>
+                          Check-out extended to July 22. Late checkout &amp; lounge access.
+                        </div>
+                      </div>
+                      <div class="ticket-item gold">
+                        <div class="ticket-item-title">
+                          <span>Ground &amp; Calendar</span>
+                          <span style="color:var(--gold-light); font-size:9px;">✓ SYNCED</span>
+                        </div>
+                        <div class="ticket-item-text">
+                          Addison Lee updated to 18:00. Office notified. Board meeting +2h.
+                        </div>
+                      </div>
+                      <div class="ticket-item amber">
+                        <div class="ticket-item-title">
+                          <span>Compensation</span>
+                          <span style="color:var(--status-amber-light); font-size:9px;">FILED</span>
+                        </div>
+                        <div class="ticket-item-text">
+                          EU261 claim filed: $650 equivalent. Insurance activated.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="phone-ticket-footer">ATLAS · American Express Travel Intelligence · Verified</div>
+                  </div>
+
+                </div><!-- end .phone-screen -->
+              </div><!-- end .phone-device -->
+            </div><!-- end .phone-wrap -->
+          </div>
+
+        </div><!-- end .simulator-grid -->
+      </div><!-- end .page-scroll -->
+    </section>
+
+    <!-- ==================== TAB: KNOWLEDGE GRAPH ==================== -->
+    <section id="tab-graph" class="tab-content">
+      <div class="page-scroll" style="flex:1; overflow:hidden; padding-bottom: 0;">
+        <div class="graph-layout">
+
+          <!-- Graph Canvas -->
+          <div class="card graph-canvas-card">
+            <svg class="graph-canvas" id="graph-svg"></svg>
+            <div class="graph-legend">
+              <div class="legend-item"><div class="legend-dot" style="background:var(--amex-blue)"></div>Active Path</div>
+              <div class="legend-item"><div class="legend-dot" style="background:var(--status-red)"></div>Disrupted Node</div>
+              <div class="legend-item"><div class="legend-dot" style="background:var(--status-green)"></div>Rerouted Path</div>
+              <div class="legend-item"><div class="legend-dot" style="background:var(--gold)"></div>Dependent Node</div>
+            </div>
+          </div>
+
+          <!-- Inspector Panel -->
+          <div class="card graph-inspector">
+            <div class="card-header">
+              <div class="card-title">
+                <div class="card-title-icon">
+                  <svg viewBox="0 0 24 24"><path d="M11 2a9 9 0 100 18A9 9 0 0011 2zm0 16a7 7 0 110-14 7 7 0 010 14zm7.71 1.29l-2.86-2.86c.57-.74.99-1.6 1.2-2.53l2.9 2.9-1.24 1.49z"/></svg>
+                </div>
+                Node Intelligence Inspector
+              </div>
+            </div>
+            <div class="inspector-empty" id="inspector-empty">
+              <div class="inspector-empty-icon">
+                <svg viewBox="0 0 24 24"><path d="M15 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V9l-6-6zm4 16H5V5h9v5h5v9zM7 17h10v-2H7v2zm0-4h10v-2H7v2zm0-4h7V7H7v2z"/></svg>
+              </div>
+              <div class="inspector-empty-text">Click any node to inspect its state, downstream dependencies, and AI confidence metrics.</div>
+            </div>
+            <div class="inspector-content" id="inspector-content" style="display:none;">
+              <div>
+                <div class="inspector-type-label" id="ins-type">Flight</div>
+                <div class="inspector-node-name" id="ins-name">DEL → DXB</div>
+              </div>
+              <div class="inspector-divider"></div>
+              <div class="inspector-row">
+                <span class="inspector-row-label">Status</span>
+                <span class="badge badge-green" id="ins-status">On Time</span>
+              </div>
+              <div class="inspector-row">
+                <span class="inspector-row-label">AI Confidence</span>
+                <span class="inspector-row-value" id="ins-confidence">99.2%</span>
+              </div>
+              <div class="inspector-row">
+                <span class="inspector-row-label">Risk Factor</span>
+                <span class="inspector-row-value" id="ins-impact">None</span>
+              </div>
+              <div class="inspector-divider"></div>
+              <div>
+                <div style="font-size:10px; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:8px; font-weight:700;">Downstream Dependencies</div>
+                <div class="deps-list" id="ins-deps">
+                  <span class="dep-chip">DXB Transit</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB: AGENT SWARM ==================== -->
+    <section id="tab-swarm" class="tab-content">
+      <div class="page-scroll">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+          <div>
+            <div style="font-size: 13px; color: var(--text-muted);">10 specialized AI employees operating autonomously in parallel</div>
+          </div>
+          <div style="display: flex; gap: 10px; align-items: center;">
+            <span class="badge badge-blue" id="swarm-running-count">0 Active</span>
+            <span class="badge badge-green" id="swarm-done-count">0 Resolved</span>
+          </div>
+        </div>
+        <div class="agents-grid" id="agents-grid">
+          <!-- Populated by agents.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB: DIGITAL TWIN ==================== -->
+    <section id="tab-twin" class="tab-content">
+      <div class="page-scroll">
+        <div class="twin-layout">
+
+          <!-- Profile Card -->
+          <div class="card card-padded twin-profile-card">
+            <div class="twin-card-inner">
+              <div class="twin-avatar">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+                <div class="twin-verified">
+                  <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                </div>
+              </div>
+              <div class="twin-name">Amit Sharma</div>
+              <div class="twin-role">Corporate Executive · Gold Card Member</div>
+
+              <div class="twin-divider"></div>
+
+              <div class="twin-attrs">
+                <div class="twin-attr">
+                  <span class="twin-attr-label">Employer</span>
+                  <span class="twin-attr-value">Delta Corp International</span>
+                </div>
+                <div class="twin-attr">
+                  <span class="twin-attr-label">Preferred Airline</span>
+                  <span class="twin-attr-value">Emirates (Skywards Gold)</span>
+                </div>
+                <div class="twin-attr">
+                  <span class="twin-attr-label">Preferred Hotel</span>
+                  <span class="twin-attr-value">Marriott (Bonvoy Elite)</span>
+                </div>
+                <div class="twin-attr">
+                  <span class="twin-attr-label">Dietary Need</span>
+                  <span class="twin-attr-value">Vegetarian</span>
+                </div>
+                <div class="twin-attr">
+                  <span class="twin-attr-label">Seat Preference</span>
+                  <span class="twin-attr-value">Window / Aisle (row ≤15)</span>
+                </div>
+                <div class="twin-attr">
+                  <span class="twin-attr-label">Walking Pace</span>
+                  <span class="twin-attr-value">1.4 m/s (Fast)</span>
+                </div>
+                <div class="twin-attr">
+                  <span class="twin-attr-label">Trips This Year</span>
+                  <span class="twin-attr-value">34 flights logged</span>
+                </div>
+                <div class="twin-attr">
+                  <span class="twin-attr-label">AMEX Card</span>
+                  <span class="twin-attr-value">Platinum Business</span>
+                </div>
+              </div>
+
+              <div class="twin-divider"></div>
+              <div style="display: flex; flex-direction: column; gap: 6px; width: 100%;">
+                <span class="badge badge-gold" style="justify-content: center;">AMEX Centurion Lounge Access</span>
+                <span class="badge badge-blue" style="justify-content: center;">Priority Immigration FastTrack</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sliders Panel -->
+          <div class="card card-padded sliders-panel">
+            <div style="margin-bottom: 20px;">
+              <div style="font-family: var(--font-display); font-size: 16px; font-weight: 700; color: var(--text-white);">Behavioral Decision Model</div>
+              <div style="font-size: 13px; color: var(--text-muted); margin-top: 5px; line-height: 1.5;">Configure how ATLAS makes autonomous decisions on behalf of this traveler. Changing these parameters dynamically recalibrates the AI Decision Simulator.</div>
+            </div>
+
+            <div class="slider-group">
+              <div class="slider-header">
+                <span class="slider-label">Cost vs. Delay Avoidance</span>
+                <span class="slider-value" id="twin-val-cost">Delay Avoidance (85%)</span>
+              </div>
+              <div class="slider-track-row">
+                <span class="slider-endpoint">Minimize Cost</span>
+                <input type="range" id="twin-slider-cost" min="0" max="100" value="85">
+                <span class="slider-endpoint right">Avoid Delay</span>
+              </div>
+            </div>
+
+            <div class="slider-group">
+              <div class="slider-header">
+                <span class="slider-label">Airline Loyalty Preference</span>
+                <span class="slider-value" id="twin-val-loyalty">Moderate (60%)</span>
+              </div>
+              <div class="slider-track-row">
+                <span class="slider-endpoint">Any Carrier</span>
+                <input type="range" id="twin-slider-loyalty" min="0" max="100" value="60">
+                <span class="slider-endpoint right">Emirates Only</span>
+              </div>
+            </div>
+
+            <div class="slider-group">
+              <div class="slider-header">
+                <span class="slider-label">Layover Tolerance</span>
+                <span class="slider-value" id="twin-val-layover">Short Layovers (75%)</span>
+              </div>
+              <div class="slider-track-row">
+                <span class="slider-endpoint">Accept 8h+ Layovers</span>
+                <input type="range" id="twin-slider-layover" min="0" max="100" value="75">
+                <span class="slider-endpoint right">Under 2h Only</span>
+              </div>
+            </div>
+
+            <div class="slider-group">
+              <div class="slider-header">
+                <span class="slider-label">Hotel Comfort Level</span>
+                <span class="slider-value" id="twin-val-hotel">Marriott / Premium (90%)</span>
+              </div>
+              <div class="slider-track-row">
+                <span class="slider-endpoint">Budget</span>
+                <input type="range" id="twin-slider-hotel" min="0" max="100" value="90">
+                <span class="slider-endpoint right">5-Star Premium</span>
+              </div>
+            </div>
+
+            <div class="slider-hint">
+              <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+              <div><strong style="color:var(--text-cream);">Decision Impact:</strong> High Delay Avoidance with Moderate Loyalty causes ATLAS to book Qatar Airways first. High Loyalty with Low Cost sensitivity keeps Emirates flights preferred even at longer layovers.</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB: SYSTEM LOGS ==================== -->
+    <section id="tab-logs" class="tab-content">
+      <div class="page-scroll" style="flex:1;">
+        <div class="card logs-card">
+          <div class="logs-toolbar">
+            <div class="logs-filters">
+              <button class="log-filter-btn active" data-filter="all">All</button>
+              <button class="log-filter-btn" data-filter="info">INFO</button>
+              <button class="log-filter-btn" data-filter="warn">WARN</button>
+              <button class="log-filter-btn" data-filter="err">ERROR</button>
+              <button class="log-filter-btn" data-filter="success">RESOLVED</button>
+            </div>
+            <input type="text" class="logs-search" id="logs-search-input" placeholder="Filter telemetry stream...">
+          </div>
+          <div class="logs-console" id="logs-console-window"></div>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- end .main-content -->
+</div><!-- end .app-container -->
+
+<script src="modules/graph.js"></script>
+<script src="modules/agents.js"></script>
+<script src="modules/twin.js"></script>
+<script src="modules/simulator.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Build and Output directories
+dist/
+**/dist/
+dist-ssr/
+build/
+out/
+
+# Environment and Confidential Configuration Files
+.env
+.env.*
+*.env
+!.env.example
+server/.env
+
+# Database and Local Data Files
+*.db
+*.sqlite
+*.sqlite3
+server/atlas.db
+
+# Exclude README and Pitch Deck / Confidential Documentation (as requested)
+README.md
+readme.md
+**/README.md
+**/readme.md
+AMEX_ATLAS_Pitch_Deck_Documentation.md
+*.md
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Editor & OS system files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.DS_Store
+Thumbs.db
