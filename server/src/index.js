@@ -15,10 +15,17 @@ const notificationsRoutes = require('./routes/notifications');
 const journeysRoutes      = require('./routes/journeys');
 const { startRealtimeMonitor } = require('./services/realtimeMonitor');
 
+const path = require('path');
+const fs = require('fs');
+
 const app  = express();
 const PORT = process.env.PORT || 3001;
 
-app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
+const allowedOrigins = process.env.CLIENT_URL
+  ? [process.env.CLIENT_URL, 'http://localhost:5173', 'http://localhost:3000']
+  : true;
+
+app.use(cors({ origin: allowedOrigins, credentials: true }));
 app.use(express.json());
 
 app.use('/api/auth',          authRoutes);
@@ -36,7 +43,17 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', service: 'ATLAS API', timestamp: new Date().toISOString() });
 });
 
-app.use((req, res) => res.status(404).json({ error: `Route ${req.method} ${req.path} not found` }));
+// Serve static frontend build if present
+const clientDistPath = path.join(__dirname, '../../client/dist');
+if (fs.existsSync(clientDistPath)) {
+  app.use(express.static(clientDistPath));
+  app.get('*', (req, res, next) => {
+    if (req.path.startsWith('/api')) return next();
+    res.sendFile(path.join(clientDistPath, 'index.html'));
+  });
+}
+
+app.use('/api/*', (req, res) => res.status(404).json({ error: `Route ${req.method} ${req.path} not found` }));
 app.use((err, req, res, next) => { console.error('[Error]', err); res.status(500).json({ error: 'Internal server error' }); });
 
 // Initialize DB then start server
