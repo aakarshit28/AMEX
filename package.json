@@ -7,7 +7,7 @@
     "server": "cd server && npm run dev",
     "client": "cd client && npm run dev",
     "install:all": "cd server && npm install && cd ../client && npm install",
-    "build": "cd client && npm install && npm run build && cd ../server && npm install",
+    "build": "cd client && npm install && npm run build && cd .. && node -e \"require('fs').cpSync('client/dist', 'dist', {recursive: true})\"",
     "start": "cd server && node src/index.js"
   },
   "devDependencies": {
