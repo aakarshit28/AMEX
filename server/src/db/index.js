@@ -6,6 +6,68 @@ const isServerless = Boolean(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTI
 const DB_PATH = isServerless ? path.join('/tmp', 'atlas.db') : path.join(__dirname, '../../atlas.db');
 const SCHEMA_PATH = path.join(__dirname, 'schema.sql');
 
+const DEFAULT_SCHEMA = `
+CREATE TABLE IF NOT EXISTS users (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  email TEXT UNIQUE NOT NULL,
+  password_hash TEXT NOT NULL,
+  name TEXT NOT NULL,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS traveler_profiles (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  user_id INTEGER UNIQUE NOT NULL,
+  traveler_name TEXT,
+  employer TEXT,
+  preferred_airline TEXT,
+  preferred_hotel TEXT,
+  dietary TEXT,
+  seat_preference TEXT,
+  cost_vs_delay INTEGER DEFAULT 85,
+  loyalty_weight INTEGER DEFAULT 60,
+  layover_tolerance INTEGER DEFAULT 75,
+  hotel_comfort INTEGER DEFAULT 90,
+  amex_card_number TEXT DEFAULT '3782 •••••• 81005',
+  amex_card_tier TEXT DEFAULT 'Platinum Business',
+  amex_member_since TEXT DEFAULT '2018',
+  amex_verified INTEGER DEFAULT 1,
+  amex_verification_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+  amex_lounge_access TEXT DEFAULT 'Centurion Lounge & Delta Sky Club Priority',
+  FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+CREATE TABLE IF NOT EXISTS journeys (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  user_id INTEGER,
+  title TEXT NOT NULL,
+  origin_city TEXT,
+  origin_code TEXT,
+  transit_city TEXT,
+  transit_code TEXT,
+  destination_city TEXT,
+  destination_code TEXT,
+  flight_leg1 TEXT,
+  flight_leg2 TEXT,
+  hotel_name TEXT,
+  ground_transport TEXT,
+  meeting_title TEXT,
+  status TEXT DEFAULT 'Scheduled',
+  is_active INTEGER DEFAULT 1,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS event_history (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  user_id INTEGER,
+  event_type TEXT NOT NULL,
+  step_number INTEGER,
+  title TEXT NOT NULL,
+  description TEXT,
+  timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+`;
+
 let db = null;
 let SQL = null;
 
@@ -25,9 +87,14 @@ async function initDb() {
   }
 
   // Enable WAL-style persistence (sql.js writes when we call export)
+  let schema = DEFAULT_SCHEMA;
   if (fs.existsSync(SCHEMA_PATH)) {
-    const schema = fs.readFileSync(SCHEMA_PATH, 'utf8');
+    try { schema = fs.readFileSync(SCHEMA_PATH, 'utf8'); } catch {}
+  }
+  try {
     db.run(schema);
+  } catch (e) {
+    console.warn('[DB Schema Init Warning]:', e.message);
   }
 
   // Safe migrations for card verification columns
